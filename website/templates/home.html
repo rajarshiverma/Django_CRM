@@ -3,12 +3,21 @@
 {% block content %}
     <div class="col-md-6 offset-md-3">
         {% if user.is_authenticated %}
-        <h1>Welcome User</h1>
+        <h1>Records ...</h1>
+        {% if records %}
+            {% for record in records %}
+                {{ record.first_name }}
+                {{ record.last_name }}
+                {{ record.email }}
+                {{ record.phone }}
+                {{ record.address }}
+                <br/>
+            {% endfor %}
+        {% endif %}
         {%else%}
         <h1>Login</h1>
         <form method="post" action="{% url 'home' %}">
             {% csrf_token %}
-            <form>
                 <br/>
                 <br/>
                 <div class="mb-3">
@@ -20,7 +29,6 @@
                 </div>
                 <br/>
                 <button type="submit" class="btn btn-secondary">Login</button>
-              </form>
         </form>  
         {%endif%}  
     </div>
